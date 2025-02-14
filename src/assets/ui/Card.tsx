@@ -4,6 +4,7 @@ import { LinkSVG, TrashIcon } from "../icons/icnonSvg";
 import { deleteContent, fetchContents } from "../services/api";
 import { contentState, LoadingState } from "../../recoil/atom";
 import { useSetRecoilState } from "recoil";
+import { formatDistanceToNow, subDays, subMonths } from 'date-fns';
 
 // const contents = [
 //         {
@@ -119,7 +120,35 @@ const Card = ({ content }: { content: Content }) => {
         return null
     }
 
-    const HandleDelete = async (id: number) => {
+    const handleCopy = (e: any, link: string) => {
+        e.preventDefault();
+        // navigator.clipboard.writeText(link).then(() => {
+        // alert('Text copied to clipboard!');
+        // }).catch(err => {
+        // console.error('Error copying text: ', err);
+        // });
+        if (navigator.clipboard) {
+        // Modern method for browsers that support Clipboard API
+        navigator.clipboard.writeText(link).then(() => {
+            alert('Text copied to clipboard!');
+        }).catch(err => {
+            console.error('Error copying text using Clipboard API: ', err);
+        });
+        } else {
+      // Fallback for older browsers (works better for mobile in some cases)
+        const textArea = document.createElement('textarea');
+        textArea.value = link;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert('Text copied to clipboard (fallback method)!');
+        }
+    };
+
+    
+    const HandleDelete = async (e: any, id: number) => {
+        e.preventDefault();
         setIsLoading(true);
         const deleted = await deleteContent(id);
         fetchContents()
@@ -142,14 +171,17 @@ const Card = ({ content }: { content: Content }) => {
                 <div className="flex w-8/12 md:w-8/12 gap-4 justify-between ">
                     <button
                         className="flex w-1/2 items-center justify-between "
-                        onClick={() => HandleDelete(content.id)}
+                        onClick={(e) => HandleDelete(e, content.id)}
                     >
                         <div className="flex w-full justify-around items-end text-neutral-300 text-xs md:text-sm  inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)] px-3 pb-1 pt-[2px] ">
                         <p>Delete</p>    
                             <TrashIcon />
                         </div>
                     </button>
-                    <button className="flex w-1/2 items-center justify-between ">
+                    <button
+                        className="flex w-1/2 items-center justify-between "
+                        onClick={(e) => handleCopy(e, content.link)}
+                    >
                         <div className="flex w-full justify-around items-end text-neutral-300 text-xs md:text-sm  inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)] px-3 pb-1 pt-[2px]">
                             <p>Copy</p>    
                                 <LinkSVG />
@@ -157,7 +189,7 @@ const Card = ({ content }: { content: Content }) => {
                     </button>
                 </div>
                         <div className="right text-neutral-300/50 font-medium text-right text-xs pr-1">
-                            <p>2 month ago</p>
+                            <TimeAgo key={content.id} timestamp={content.createdAt} />
                         </div>
                     </div>
                 <div className="relative mb-6   rounded-[20px] shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]">
@@ -212,6 +244,16 @@ const Card = ({ content }: { content: Content }) => {
         
     </>
 };
+
+const TimeAgo = ({ timestamp }: { timestamp: string }) => {
+    const relativeTime = formatDistanceToNow(new Date(timestamp), { addSuffix: true });
+
+    return (
+        <div>
+            <p>{relativeTime}</p>
+        </div>
+    )
+}
 
 const Tag = ({ tag }: { tag: string }) => {
     return <div
