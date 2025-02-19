@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
+import { useSetRecoilState } from "recoil";
+import { authState } from "../../recoil/atom";
 
 const Layout = ({children}: any) => {
     return <>
@@ -14,9 +16,11 @@ const Layout = ({children}: any) => {
 };
 
 const Header = () => {
+    const setAuth = useSetRecoilState(authState);
     const Navigate = useNavigate()
     const handleLogout = () => {
         localStorage.removeItem("token")
+        setAuth(false)
         Navigate("/login")
     }   
     return <>
@@ -24,7 +28,7 @@ const Header = () => {
             <header className="z-40 fixed w-9/12 md:w-8/12 flex  justify-between items-center h-16 px-5 md:px-20 bg-black/10 backdrop-blur-lg border-mywhite-border shadow-md rounded-xl">
                 <div>
 
-                <h1 className="text-xl text-myblack-text font-bold">My Links</h1>
+                <h1 className="text-xl md:text-[27px] text-neutral-500 font-extrabold tracking-wide ">Storify</h1>
                 </div>
                 <div className="">
                     <Button

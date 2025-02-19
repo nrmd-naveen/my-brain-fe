@@ -1,23 +1,36 @@
 import apiClient from "./apiClient";
 
-export const login = async (data: { email: string; password: string }) => {
+export const login = async (data: { username: string; password: string }) => {
     const res = await apiClient.post("/auth/signin",  {
-            username: data.email,
+            username: data.username,
             password: data.password
     });
+  console.log(res)
     localStorage.setItem("token", res.data.token);
     return res.data;
 };
 
-export const signUp = async (data: { email: string; password: string }) => {
-    const res = await  apiClient.post("/auth/signin",  {
-            username: data.email,
+export const signUp = async (data: { username: string; password: string }) => {
+    const res = await  apiClient.post("/auth/signup",  {
+            username: data.username,
             password: data.password
     });
     console.log(res)
   return res.data;
 };
 
+export const verifyToken = async () => {
+      try {
+        const response = await apiClient.get("/auth/verify");
+        console.log(response)
+        if (response.status === 201) return true;
+        else return false;
+      } catch(err) {
+        console.log(err)
+        return false;
+      }
+};
+    
 export const fetchContents = async () => {
   const { data } = await apiClient.get("/content/all");
   return data;

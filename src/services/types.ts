@@ -9,3 +9,9 @@ export interface Content {
     userId: number;
     tags: string[];
 }
+
+export type AlertState = {
+  message: string;
+  type: "success" | "error";
+  isVisible: boolean;
+};

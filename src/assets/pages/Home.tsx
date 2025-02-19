@@ -2,15 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 import Input from "../ui/Input";
-import Card, { CardNew } from "../ui/Card";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { Content } from "../services/types";
-import { contentState, LoadingState } from "../../recoil/atom";
-import { addContent, fetchContents } from "../services/api";
+import Card from "../ui/Card";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { alertState, contentState, LoadingState } from "../../recoil/atom";
+import { addContent, fetchContents } from "../../services/api";
 import DotLoader from "../ui/Loader";
 
 const Home = () => {
-  const [content, setContent] = useRecoilState<Content[]>(contentState)
+  const setContent = useSetRecoilState(contentState)
   const [isLoading, setIsLoading] = useRecoilState<boolean>(LoadingState)
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const Home = () => {
 };
 
 const CardComponent = () => {
-    const [content, setContent] = useRecoilState<Content[]>(contentState)
+    const content = useRecoilValue(contentState)
     return (
       <>
         
@@ -64,7 +63,8 @@ const CardComponent = () => {
 const PopUp = () => {
 
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useRecoilState<boolean>(LoadingState)
+  const setIsLoading = useSetRecoilState<boolean>(LoadingState)
+  const setAlert = useSetRecoilState(alertState)
   const setContent = useSetRecoilState(contentState)
   const setOnClick = () => {
     setDialogOpen( curr => !curr)
@@ -90,7 +90,12 @@ const PopUp = () => {
         tagRef.current.focus()
       }
     } else {
-      alert('Please enter a tag to add')
+      setAlert((prev) => ({
+        ...prev,
+        message: "Please fill Credentials",
+        type: "error",
+        isVisible: true,
+      }))
     }
   }
   const handleSubmit = () => {
@@ -119,9 +124,10 @@ const PopUp = () => {
 
   return (
     <>
-      <div className="flex items-center justify-end" >
+      <div className="fixed bottom-20 right-10 md:right-40 z-50 flex items-center justify-end" >
     <Button 
-      text='New +'
+          text='New +'
+          className="w-36 h-12 "
       onClick={()=>setOnClick()}
       variant='primary'
         />

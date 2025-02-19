@@ -15,7 +15,7 @@ interface ButtonProps {
 
 const Button = (props: ButtonProps) => {
     const variantStyles = {
-        primary: "bg-[#e1e0e0] hover:bg-[#ededed] text-black/80 border border-mywhite-border rounded-lg ",
+        primary: "bg-[#e1e0e0] hover:bg-[#ededed] text-neutral-200 bg-black/20 backdrop-blur-lg border-mywhite-border shadow-xl rounded-lg ",
         primaryFull: "bg-[#DCDCDC] text-black/80 border border-mywhite-border rounded-full",
         secondary: "bg-black/30 text-white rounded-full ",
         outline: "bg-transparent border border-mywhite-border text-mywhite-bg rounded-full ",

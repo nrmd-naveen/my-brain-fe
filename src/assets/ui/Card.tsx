@@ -1,8 +1,8 @@
 import React from "react";
-import { Content } from "../services/types";
+import { Content } from "../../services/types";
 import { LinkSVG, TrashIcon } from "../icons/icnonSvg";
-import { deleteContent, fetchContents } from "../services/api";
-import { contentState, LoadingState } from "../../recoil/atom";
+import { deleteContent, fetchContents } from "../../services/api";
+import { alertState, contentState, LoadingState } from "../../recoil/atom";
 import { useSetRecoilState } from "recoil";
 import { formatDistanceToNow, subDays, subMonths } from 'date-fns';
 
@@ -108,6 +108,7 @@ export const CardNew = ({ content }: { content: Content }) => {
 const Card = ({ content }: { content: Content }) => {
     const setIsLoading = useSetRecoilState(LoadingState);
     const setContent = useSetRecoilState(contentState)
+    const setAlert = useSetRecoilState(alertState)
     const url = new URL(content.link);
     const getYTVideoID = () => {
         if (url.searchParams.get('v')) return url.searchParams.get('v')
@@ -122,27 +123,32 @@ const Card = ({ content }: { content: Content }) => {
 
     const handleCopy = (e: any, link: string) => {
         e.preventDefault();
-        // navigator.clipboard.writeText(link).then(() => {
-        // alert('Text copied to clipboard!');
-        // }).catch(err => {
-        // console.error('Error copying text: ', err);
-        // });
         if (navigator.clipboard) {
-        // Modern method for browsers that support Clipboard API
         navigator.clipboard.writeText(link).then(() => {
             alert('Text copied to clipboard!');
         }).catch(err => {
             console.error('Error copying text using Clipboard API: ', err);
+            setAlert((prev) => ({
+                ...prev,
+                message: "Error while copying link!",
+                type: "error",
+                isVisible: true,
+            }))
         });
         } else {
-      // Fallback for older browsers (works better for mobile in some cases)
+        // Handles All Mobile
         const textArea = document.createElement('textarea');
         textArea.value = link;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        alert('Text copied to clipboard (fallback method)!');
+        setAlert((prev) => ({
+            ...prev,
+            message: "Link copied successfully!",
+            type: "success",
+            isVisible: true,
+        }))
         }
     };
 
@@ -157,10 +163,20 @@ const Card = ({ content }: { content: Content }) => {
         })
         setIsLoading(false);
         if (deleted) {
-            alert("Content deleted successfully");
+            setAlert((prev) => ({
+                ...prev,
+                message: "Content deleted successfully!",
+                type: "success",
+                isVisible: true,
+            }))
         }
         else {
-            alert("Something went wrong");
+            setAlert((prev) => ({
+                ...prev,
+                message: "Something went wrong",
+                type: "error",
+                isVisible: true,
+            }))
         }
     }
 
@@ -188,7 +204,7 @@ const Card = ({ content }: { content: Content }) => {
                         </div>
                     </button>
                 </div>
-                        <div className="right text-neutral-300/50 font-medium text-right text-xs pr-1">
+                        <div className="right text-neutral-300/50 font-medium text-right text-xs md:pl-4 pr-1 md:pr-2">
                             <TimeAgo key={content.id} timestamp={content.createdAt} />
                         </div>
                     </div>
@@ -216,7 +232,7 @@ const Card = ({ content }: { content: Content }) => {
                             title="Twitter Post"
                         ></iframe>
                         }
-                    {content.type === 'Others' && <img className="w-full h-full border-[1px] border-mywhite-border  rounded-[16px]" src={content.thumbnail} alt="thumbnail" />}
+                    {content.type === 'Others' && <img className="w-full h-full  rounded-[16px]" src={content.thumbnail} alt="thumbnail" />}
                     <div className="absolute inset-0 rounded-[16px]">
                         <div className="absolute inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)]">
 
@@ -232,9 +248,12 @@ const Card = ({ content }: { content: Content }) => {
                         <div className="absolute inset-0 rounded-[16px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15),0px_1px_1px_0px_rgba(0,0,0,0.15)_inset,0px_0px_0px_1px_rgba(0,0,0,0.15)_inset,0px_0px_1px_0px_rgba(0,0,0,0.15)]">
                         </div>
                     </div>
-                </div>
+            </div>
+            <a target="_blank" href={content.link} >
+
                 <h3 className="mt-2 px-1 text-lg font-semibold leading-tight w-full text-neutral-200">{content.title}</h3>
-            <p className="px-1 pb-2 text-sm text-neutral-400">{content.description}</p>
+            </a>
+            <p className="px-1 pb-2 text-sm text-neutral-400 mt-1">{content.description}</p>
             <div className="flex  pt-4 flex-wrap gap-3">
                     {content.tags.map((tag) => {
                         return <Tag tag={tag} />

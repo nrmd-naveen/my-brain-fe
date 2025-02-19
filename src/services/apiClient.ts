@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.BACKEND_URL || "http://localhost:5050/api",
+  baseURL: import.meta.env.BACKEND_URL || "https://storify-be.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
