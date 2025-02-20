@@ -1,4 +1,3 @@
-import React from "react";
 import App from "./App";
 import BarsSVG from "./assets/icons/BarsSVG";
 import { useNavigate } from "react-router-dom";

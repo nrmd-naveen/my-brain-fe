@@ -6,36 +6,36 @@ import { useSetRecoilState } from "recoil";
 import { formatDistanceToNow, } from 'date-fns';
 
 
-export const CardNew = ({ content }: { content: Content }) => {
+// export const CardNew = ({ content }: { content: Content }) => {
 
-    return (
-        <>
-            <div className=" mx-6 rounded-[24px] bg-neutral-50 hover:bg-neutral-100 shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)] relative p-2 no-underline  transition-colors bg-neutral-800/90 hover:bg-neutral-800/80">
-                <div className="relative mb-6  w-full rounded-[20px] shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]">
-                    <div className="relative mb-6  w-full rounded-[20px] shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]">
-                <img alt="Landing Page" loading="lazy" className="absolute inset-0 size-full rounded-[16px] object-cover " src="https://my-brain-store.s3.eu-north-1.amazonaws.com/user_4/thumbnails/Skiper_UI.png" />
-                    <div className="absolute inset-0 rounded-[16px]">
-                        <div className="absolute inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)]">
+//     return (
+//         <>
+//             <div className=" mx-6 rounded-[24px] bg-neutral-50 hover:bg-neutral-100 shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)] relative p-2 no-underline  transition-colors bg-neutral-800/90 hover:bg-neutral-800/80">
+//                 <div className="relative mb-6  w-full rounded-[20px] shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]">
+//                     <div className="relative mb-6  w-full rounded-[20px] shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]">
+//                 <img alt="Landing Page" loading="lazy" className="absolute inset-0 size-full rounded-[16px] object-cover " src="https://my-brain-store.s3.eu-north-1.amazonaws.com/user_4/thumbnails/Skiper_UI.png" />
+//                     <div className="absolute inset-0 rounded-[16px]">
+//                         <div className="absolute inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)]">
 
-                        </div>
-                        <div className="absolute inset-0 rounded-[16px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15),0px_1px_1px_0px_rgba(0,0,0,0.15)_inset,0px_0px_0px_1px_rgba(0,0,0,0.15)_inset,0px_0px_1px_0px_rgba(0,0,0,0.15)]">
-                        </div>
-                    </div>
-            </div>
-                <div className="absolute inset-0 rounded-[16px]">
-                        <div className="absolute inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)]">
+//                         </div>
+//                         <div className="absolute inset-0 rounded-[16px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15),0px_1px_1px_0px_rgba(0,0,0,0.15)_inset,0px_0px_0px_1px_rgba(0,0,0,0.15)_inset,0px_0px_1px_0px_rgba(0,0,0,0.15)]">
+//                         </div>
+//                     </div>
+//             </div>
+//                 <div className="absolute inset-0 rounded-[16px]">
+//                         <div className="absolute inset-0 rounded-[16px] shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)]">
                             
-                    </div>
-                        <div className="absolute inset-0 rounded-[16px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15),0px_1px_1px_0px_rgba(0,0,0,0.15)_inset,0px_0px_0px_1px_rgba(0,0,0,0.15)_inset,0px_0px_1px_0px_rgba(0,0,0,0.15)]">
-                        </div>
-                    </div>
-                </div>
-                <h3 className="mt-2 px-1 text-lg font-semibold leading-tight w-full text-neutral-200">Landing Page</h3>
-                <p className="px-1 pb-2 text-sm text-neutral-400">Modern landing page template featuring Framer Motion animations, custom navigation components, and responsive design optimized for conversions.</p>
-            </div>
-        </>
-    )
-}
+//                     </div>
+//                         <div className="absolute inset-0 rounded-[16px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15),0px_1px_1px_0px_rgba(0,0,0,0.15)_inset,0px_0px_0px_1px_rgba(0,0,0,0.15)_inset,0px_0px_1px_0px_rgba(0,0,0,0.15)]">
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <h3 className="mt-2 px-1 text-lg font-semibold leading-tight w-full text-neutral-200">Landing Page</h3>
+//                 <p className="px-1 pb-2 text-sm text-neutral-400">Modern landing page template featuring Framer Motion animations, custom navigation components, and responsive design optimized for conversions.</p>
+//             </div>
+//         </>
+//     )
+// }
 
 const Card = ({ content }: { content: Content }) => {
     const setIsLoading = useSetRecoilState(LoadingState);
