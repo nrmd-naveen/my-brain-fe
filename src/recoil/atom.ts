@@ -25,7 +25,7 @@ export const authState = atom<boolean>({
 export const alertState = atom<AlertState>({
   key: "alertState",
   default: {
-    message: "...",
+    message: ". . .",
     type: "success",
     isVisible: false,
   },

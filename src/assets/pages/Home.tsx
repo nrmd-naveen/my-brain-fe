@@ -99,6 +99,15 @@ const PopUp = () => {
     }
   }
   const handleSubmit = () => {
+    if (!(linkRef.current?.value || linkRef.current?.value.length)) {
+      setAlert((prev) => ({
+        ...prev,
+        message: "Please Enter a Link to Add",
+        type: "error",
+        isVisible: true,
+      }))
+      return;
+    }
     setIsLoading(true)
     const data = {
       link: linkRef.current?.value,
@@ -124,7 +133,7 @@ const PopUp = () => {
 
   return (
     <>
-      <div className="fixed bottom-20 right-10 md:right-40 z-50 flex items-center justify-end" >
+      <div className="fixed bottom-20 right-10 md:right-40 z-20 flex items-center justify-end" >
     <Button 
           text='New +'
           className="w-36 h-12 "

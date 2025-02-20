@@ -5,6 +5,8 @@ import { deleteContent, fetchContents } from "../../services/api";
 import { alertState, contentState, LoadingState } from "../../recoil/atom";
 import { useSetRecoilState } from "recoil";
 import { formatDistanceToNow, subDays, subMonths } from 'date-fns';
+import Dialog from "./Dialog";
+import Button from "./Button";
 
 // const contents = [
 //         {
@@ -263,6 +265,29 @@ const Card = ({ content }: { content: Content }) => {
         
     </>
 };
+
+// const Confirmation = () => {
+
+//     return (
+//         <Dialog
+//             isOpen={false}
+//             onClose={() => onClose()}
+//         >
+//             <h1>Are you sure?</h1>
+//             <Button
+//                 text='Yes'
+//                 onClick={() => handleDelete()}
+//                 variant='primary'
+//             />
+//             <Button
+//                 text='No'
+//                 onClick={() => onClose()}
+//                 variant='primary'
+//             />
+//         </Dialog>
+//     )
+// }
+
 
 const TimeAgo = ({ timestamp }: { timestamp: string }) => {
     const relativeTime = formatDistanceToNow(new Date(timestamp), { addSuffix: true });

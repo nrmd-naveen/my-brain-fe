@@ -21,8 +21,8 @@ const Alert = () => {
 
   return (
     <div
-      className={`z-[1000] fixed top-4 right-4 p-4 rounded-lg shadow-lg transition-opacity duration-500 ${
-        alert.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+      className={` z-[1000] fixed top-5 right-4 p-4 rounded-lg shadow-lg transition-opacity duration-500 ${
+        alert.type === 'success' ? 'bg-neutral-800' : 'bg-red-500'
       } text-white opacity-100`}
       style={{ opacity: alert.isVisible ? 1 : 0 }} // Control fade-out
     >
