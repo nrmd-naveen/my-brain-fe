@@ -115,6 +115,7 @@ const PopUp = () => {
       description: descRef.current?.value,
       tags: tags,
     }
+    //@ts-ignore
     addContent(data).then(res => {
       console.log(res)
       fetchContents().then(res => {

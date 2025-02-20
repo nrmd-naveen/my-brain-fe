@@ -1,80 +1,10 @@
-import React from "react";
 import { Content } from "../../services/types";
 import { LinkSVG, TrashIcon } from "../icons/icnonSvg";
 import { deleteContent, fetchContents } from "../../services/api";
 import { alertState, contentState, LoadingState } from "../../recoil/atom";
 import { useSetRecoilState } from "recoil";
-import { formatDistanceToNow, subDays, subMonths } from 'date-fns';
-import Dialog from "./Dialog";
-import Button from "./Button";
+import { formatDistanceToNow, } from 'date-fns';
 
-// const contents = [
-//         {
-//             "id": 5,
-//             "title": "2D Metaverse Repo",
-//             "description": "kirat 2d metaverse repo link",
-//             "thumbnail": "https://my-brain-store.s3.eu-north-1.amazonaws.com/user_1/thumbnails/2D Metaverse Repo.png",
-//             "link": "https://github.com/hkirat/2d-metaverse/",
-//             "type": "Others",
-//             "createdAt": "2025-01-18T16:47:20.996Z",
-//             "userId": 1,
-//             "tags": [
-//                 "github",
-//                 "kirat",
-//                 "repo"
-//             ]
-//         },
-//         {
-//             "id": 6,
-//             "title": "Harkirat Github",
-//             "description": "kirat git",
-//             "thumbnail": "https://my-brain-store.eu-north-1.amazonaws.com/user_1/thumbnails/Harkirat_Github.png",
-//             "link": "https://github.com/hkirat/",
-//             "type": "Others",
-//             "createdAt": "2025-01-18T18:42:43.662Z",
-//             "userId": 1,
-//             "tags": [
-//                 "github",
-//                 "kirat"
-//             ]
-//         },
-//         {
-//             "id": 7,
-//             "title": "Podcast - Business",
-//             "description": "",
-//             "thumbnail": null,
-//             "link": "https://www.youtube.com/watch?v=go11FYqklr4/",
-//             "type": "Youtube",
-//             "createdAt": "2025-01-19T16:12:37.490Z",
-//             "userId": 1,
-//             "tags": [
-//                 "podcast",
-//                 "business",
-//                 "youtube"
-//             ]
-//         }
-// ]
-    
-// const content = {
-//             "id": 5,
-//             "title": "2D Metaverse Repo",
-//             "description": "kirat 2d metaverse repo link",
-//             "thumbnail": "https://my-brain-store.s3.eu-north-1.amazonaws.com/user_1/thumbnails/2D Metaverse Repo.png",
-//             "link": "https://github.com/hkirat/2d-metaverse/",
-//             "type": "Others",
-//             "createdAt": "2025-01-18T16:47:20.996Z",
-//             "userId": 1,
-//             "tags": [
-//                 "github",
-//                 "kirddat",
-//                 "husdfb",
-//                 "kirsdfdat",
-//                 "github",
-//                 "kirat",
-//                 "repo"
-//             ]
-//         }
-        
 
 export const CardNew = ({ content }: { content: Content }) => {
 

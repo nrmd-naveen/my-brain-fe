@@ -35,6 +35,7 @@ const Login = () => {
         }
         if (data.username && data.password) {
             setIsLoading(true)
+            //@ts-ignore
             login(data).then(res => {
                 if (res.token) {
                     setAuth(true)

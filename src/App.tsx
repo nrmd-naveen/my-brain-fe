@@ -16,7 +16,7 @@ function App() {
   const alert = useRecoilValue<AlertState>(alertState);
   return (
     <>
-    {alert.isVisible && <Alert message={alert.message} type={alert.type}/>}
+    {alert.isVisible && <Alert />}
     <Router>
       <Routes>
         <Route element={<ProtectedRoute />}>

@@ -35,6 +35,7 @@ const SignUp = () => {
         }
         if (data.username && data.password) {
             setIsLoading(true);
+            //@ts-ignore
             signUp(data).then(res => {
                 console.log(res)
                 setIsLoading(false);
