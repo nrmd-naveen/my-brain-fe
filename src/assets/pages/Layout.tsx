@@ -8,7 +8,7 @@ const Layout = ({children}: any) => {
     return <>
         <div className="min-w-screen overflow-x-hidden bg-[#f0eeee]">
             <Header />
-            <div className="w-full h-full">
+            <div className="w-full h-screen ">
                 {children}
             </div>
         </div>

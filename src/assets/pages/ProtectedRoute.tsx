@@ -9,7 +9,7 @@ const ProtectedRoute = () => {
   const isAuthenticated = useRecoilValue(authState);
     const NavigateTo = useNavigate()
     useEffect(() => {
-        if(!isAuthenticated) NavigateTo("/login")
+        if(!isAuthenticated) NavigateTo("/signup")
     }, [isAuthenticated])
     
     if (!isAuthenticated) return <DotLoader />;

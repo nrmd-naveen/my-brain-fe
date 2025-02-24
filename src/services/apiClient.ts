@@ -4,7 +4,7 @@ const endpoint1 = import.meta.env.EC2_BACKEND_URL || "https://storifybe.hopto.or
 const endpoint2 = import.meta.env.RENDER_BACKEND_URL || "https://storify-be.onrender.com/api";
 
 const apiClient = axios.create({
-  baseURL: endpoint1, 
+  baseURL: endpoint2, 
   headers: {
     "Content-Type": "application/json",
   },
