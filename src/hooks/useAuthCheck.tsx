@@ -1,4 +1,4 @@
-    import { useEffect } from "react";
+import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { authState, LoadingState } from "../recoil/atom";
 import { verifyToken } from "../services/api";
@@ -11,12 +11,17 @@ const useAuthCheck = () => {
             console.log("verifying")
             setLoading(true); 
             try {
-                const verified = await verifyToken();
-                if (verified) {
+                let response = await verifyToken();
+                //@ts-ignore
+                if(response.status === 502) {
+                    response = await verifyToken();
+                }
+                //@ts-ignore
+                if (response.data.token) {
                     setAuth(true);
                 } else {
                     setAuth(false);
-                }  
+                } 
             } catch {
                 setAuth(false);
             } finally {

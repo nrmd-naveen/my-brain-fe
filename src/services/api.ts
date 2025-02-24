@@ -23,11 +23,10 @@ export const verifyToken = async () => {
       try {
         const response = await apiClient.get("/auth/verify");
         console.log(response)
-        if (response.status === 201) return true;
-        else return false;
+        return response
       } catch(err) {
         console.log(err)
-        return false;
+        return err
       }
 };
     
